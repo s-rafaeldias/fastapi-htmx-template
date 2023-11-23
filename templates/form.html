@@ -1,0 +1,23 @@
+<form
+    hx-post="/form"
+    hx-target="#data"
+    hx-on::after-request="this.reset()"
+>
+    <label for="name">Name:</label>
+    <input type="text" name="name">
+    <br/>
+
+    <label for="item_type">Item type:</label>
+    <select id="item_type" name="item_type">
+        {%- for t in item_type %}
+        <option value="{{t}}">{{t}}</option>
+        {%- endfor %}
+    </select>
+
+    <br/>
+    <br/>
+
+    <button type="submit">
+        Add new name
+    </button>
+</form>
