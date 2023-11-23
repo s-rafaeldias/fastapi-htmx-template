@@ -4,6 +4,5 @@
 - [ ] add tailwind css
 - [ ] include jinja template for reuse
 - [ ] sqlite connection
-- [ ] docker image
+- [x] docker image
 - [ ] create repo template
-
