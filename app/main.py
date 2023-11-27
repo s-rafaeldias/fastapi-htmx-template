@@ -25,6 +25,11 @@ async def shutdown():
     await db_conn.disconnect()
 
 
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", context={"request": request})
+
+
 @app.get("/data", response_class=HTMLResponse)
 async def data(request: Request):
     results = await db_conn.fetch_all("SELECT * FROM items")
@@ -44,7 +49,6 @@ async def form(request: Request):
 
 @app.post("/form", response_class=HTMLResponse)
 async def add_data(request: Request, item: models.ItemForm = Depends()):
-    # DATA.append({"name": name})
     await db.insert(item=item, db=db_conn)
 
     results = await db_conn.fetch_all("SELECT * FROM items")
@@ -53,8 +57,3 @@ async def add_data(request: Request, item: models.ItemForm = Depends()):
     return templates.TemplateResponse(
         "data.html", context={"request": request, "data": data}
     )
-
-
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", context={"request": request})
