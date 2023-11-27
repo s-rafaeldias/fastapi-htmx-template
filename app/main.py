@@ -12,12 +12,6 @@ templates = Jinja2Templates(directory="templates")
 DATABASE_URL = "sqlite:///./test.db"
 db_conn = databases.Database(DATABASE_URL)
 
-DATA = [
-    {"name": "Rafael"},
-    {"name": "Dias"},
-    {"name": "Silveira"},
-]
-
 
 @app.on_event("startup")
 async def startup():
