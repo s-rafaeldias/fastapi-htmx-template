@@ -28,9 +28,7 @@ async def shutdown():
 @app.get("/data", response_class=HTMLResponse)
 async def data(request: Request):
     results = await db_conn.fetch_all("SELECT * FROM items")
-    print(results)
     data = [{"name": name} for _, name in results]
-    print(data)
 
     return templates.TemplateResponse(
         "data.html", context={"request": request, "data": data}
@@ -47,9 +45,13 @@ async def form(request: Request):
 @app.post("/form", response_class=HTMLResponse)
 async def add_data(request: Request, item: models.ItemForm = Depends()):
     # DATA.append({"name": name})
-    print(item)
+    await db.insert(item=item, db=db_conn)
+
+    results = await db_conn.fetch_all("SELECT * FROM items")
+    data = [{"name": name} for _, name in results]
+
     return templates.TemplateResponse(
-        "data.html", context={"request": request, "data": DATA}
+        "data.html", context={"request": request, "data": data}
     )
 
 
