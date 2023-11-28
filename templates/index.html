@@ -8,10 +8,9 @@
     <title>FastAPI + HTMX</title>
 </head>
 <body class="bg-gray-50">
-    <h1 class="text-center p-8 text-4xl font-bold text-gray-900">My data</h1>
+    <h1 class="p-8 text-4xl font-bold text-center text-gray-900">My data</h1>
 
     <div hx-get="/form" hx-trigger="load" class="text-center"></div>
-    <div hx-get="/data" hx-trigger="load" id="data" class="text-center pt-8"></div>
+    <div hx-get="/data" hx-trigger="load" id="data" class="pt-8 text-center"></div>
 </body>
 </html>
-
