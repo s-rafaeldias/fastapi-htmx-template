@@ -2,10 +2,12 @@ from app import models
 from app import database as db
 from fastapi.templating import Jinja2Templates
 from fastapi import FastAPI, Request, Depends
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import databases
 
 app = FastAPI()
+app.mount("/dist", StaticFiles(directory="dist"), name="dist")
 
 templates = Jinja2Templates(directory="templates")
 

@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@1.9.9"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/dist/output.css" rel="stylesheet">
     <title>FastAPI + HTMX</title>
 </head>
 <body>
-    <h1>My data</h1>
+    <h1 class="text-center">My data</h1>
     <div hx-get="/data" hx-trigger="load" id="data"></div>
     <div hx-get="/form" hx-trigger="load"></div>
 </body>
