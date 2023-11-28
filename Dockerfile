@@ -1,12 +1,20 @@
-FROM python:3.12
+FROM python:3.12 as builder
 
 WORKDIR /code
 
-COPY ./requirements.txt /code/requirements.txt
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+RUN chmod +x tailwindcss-linux-x64
+RUN mv tailwindcss-linux-x64 tailwindcss
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+FROM builder
 
-COPY ./app /code/app
+COPY requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+COPY . /code/
+
+RUN make build-css
+RUN rm tailwindcss
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 
